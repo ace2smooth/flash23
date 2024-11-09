@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompTIA Security+ Flash Card Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .flash-card {
+            background-color: #ffffff;
+            width: 400px;
+            padding: 20px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            border-radius: 10px;
+        }
+        .question, .answer {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            padding: 10px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .download-container {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="flash-card">
+        <div id="question" class="question">What does CIA Triad stand for?</div>
+        <div id="answer" class="answer" style="display: none;">Confidentiality, Integrity, Availability</div>
+        <div class="button-container">
+            <button onclick="showAnswer()">Show Answer</button>
+            <button onclick="nextQuestion()">Next Question</button>
+        </div>
+        <div class="download-container">
+            <button onclick="downloadFlashcards()">Download Flashcards</button>
+        </div>
+    </div>
+
+    <script>
+        const flashCards = [
+            { question: "What does CIA Triad stand for?", answer: "Confidentiality, Integrity, Availability" },
+            { question: "What is the main purpose of a firewall?", answer: "To control incoming and outgoing network traffic and protect from unauthorized access." },
+            { question: "Define multi-factor authentication (MFA).", answer: "A security system that requires more than one method of authentication from independent categories of credentials." },
+            { question: "What does VPN stand for?", answer: "Virtual Private Network" },
+            { question: "What is a common hashing algorithm used in cybersecurity?", answer: "SHA-256" },
+            { question: "What does SSL/TLS provide?", answer: "Secure communication over a computer network." },
+            { question: "What is phishing?", answer: "A technique used to trick users into providing sensitive information by posing as a trustworthy entity." },
+            { question: "What is the difference between symmetric and asymmetric encryption?", answer: "Symmetric encryption uses the same key for encryption and decryption, while asymmetric encryption uses a public and a private key." },
+            { question: "What does IDS stand for?", answer: "Intrusion Detection System" },
+            { question: "What is a vulnerability scan?", answer: "An automated scan that checks systems for known vulnerabilities." },
+            { question: "What is the purpose of penetration testing?", answer: "To simulate a real-world attack to identify and exploit vulnerabilities." },
+            { question: "What does DoS stand for?", answer: "Denial of Service" },
+            { question: "What is social engineering?", answer: "Manipulating individuals to divulge confidential information." },
+            { question: "Define least privilege principle.", answer: "Providing the minimum levels of access necessary for a user to perform their job functions." },
+            { question: "What is the difference between a worm and a virus?", answer: "A worm is self-replicating and spreads without human intervention, whereas a virus requires a host file and user action to spread." },
+            { question: "What is an access control list (ACL)?", answer: "A set of rules that controls incoming and outgoing network traffic based on filtering criteria." },
+            { question: "What does PKI stand for?", answer: "Public Key Infrastructure" },
+            { question: "What is a botnet?", answer: "A network of compromised computers used to carry out attacks, often controlled by an attacker remotely." },
+            { question: "What is the main goal of risk management in cybersecurity?", answer: "To identify, assess, and prioritize risks and minimize the impact of those risks." },
+            { question: "What is a zero-day vulnerability?", answer: "A vulnerability that is unknown to the software vendor and for which no patch has been released." },
+        ];
+
+        let currentCardIndex = 0;
+
+        function showAnswer() {
+            document.getElementById('answer').style.display = 'block';
+        }
+
+        function nextQuestion() {
+            currentCardIndex = (currentCardIndex + 1) % flashCards.length;
+            document.getElementById('question').innerText = flashCards[currentCardIndex].question;
+            document.getElementById('answer').innerText = flashCards[currentCardIndex].answer;
+            document.getElementById('answer').style.display = 'none';
+        }
+
+        function downloadFlashcards() {
+            const blob = new Blob([JSON.stringify(flashCards, null, 2)], { type: "application/json" });
+            const link = document.createElement("a");
+            link.href = URL.createObjectURL(blob);
+            link.download = "CompTIA_Security_Plus_Flashcards.json";
+            link.click();
+        }
+    </script>
+</body>
+</html>
